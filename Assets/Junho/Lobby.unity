@@ -252,7 +252,7 @@ Terrain:
   m_GameObject: {fileID: 215286186}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: 79ea174445da1144d9c28d7d738ecbf1, type: 2}
+  m_TerrainData: {fileID: 0}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -358,8 +358,7 @@ MonoBehaviour:
   m_text: START
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
-  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f,
-    type: 2}
+  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -493,8 +492,7 @@ MonoBehaviour:
   m_text: X
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
-  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f,
-    type: 2}
+  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -904,8 +902,7 @@ MonoBehaviour:
   m_text: "\uB3C4\uC6C0\uB9D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
-  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f,
-    type: 2}
+  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1446,8 +1443,7 @@ MonoBehaviour:
     Y , X , A , B : \uACF5\uC911 \uBCF4\uB4DC \uD68C\uC804"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
-  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f,
-    type: 2}
+  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2220,8 +2216,7 @@ MonoBehaviour:
   m_text: QUIT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
-  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f,
-    type: 2}
+  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2305,7 +2300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1866093498}
   - component: {fileID: 1866093497}
-  - component: {fileID: 1866093496}
+  - component: {fileID: 1866093499}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2313,26 +2308,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1866093496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866093495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &1866093497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2363,6 +2338,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1866093499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866093495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
 --- !u!1 &1924827701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,6 +2483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1987096562}
   - component: {fileID: 1987096561}
+  - component: {fileID: 1987096563}
   m_Layer: 0
   m_Name: ButtonController
   m_TagString: Untagged
@@ -2498,6 +2504,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helpCanvas: {fileID: 2085070236}
+  buttons:
+  - {fileID: 866338720}
+  - {fileID: 803036446}
+  - {fileID: 1388211516}
 --- !u!4 &1987096562
 Transform:
   m_ObjectHideFlags: 0
@@ -2513,6 +2523,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1987096563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987096560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Gamepad
+  m_DefaultActionMap: UI
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &2029293648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2657,8 +2697,7 @@ MonoBehaviour:
   m_text: SnowBoard Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
-  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f,
-    type: 2}
+  m_sharedMaterial: {fileID: -8101050700066260611, guid: df08ac442269d0640a24f8c6b450fc1f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
