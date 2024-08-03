@@ -367,15 +367,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4243358427390916806, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 70
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4243358427390916806, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 395
+      value: 430
       objectReference: {fileID: 0}
     - target: {fileID: 4243358427390916806, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 70
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4243358427390916806, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -599,7 +599,7 @@ Transform:
   m_GameObject: {fileID: 1091641917}
   serializedVersion: 2
   m_LocalRotation: {x: 0.48668033, y: 0.31799212, z: -0.19597381, w: 0.7896946}
-  m_LocalPosition: {x: 66.432, y: 401.2678, z: 66.432}
+  m_LocalPosition: {x: 56.432, y: 436.2678, z: 56.432}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -724,7 +724,7 @@ Transform:
   m_GameObject: {fileID: 1236761463}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: 66.432, y: 401.2678, z: 66.432}
+  m_LocalPosition: {x: 56.432, y: 436.2678, z: 56.432}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -944,13 +944,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920698957}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.3812272, y: -0.08052145, z: 0.033353075, w: 0.9203639}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: -10, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
