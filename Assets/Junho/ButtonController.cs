@@ -68,7 +68,7 @@ public class ButtonController : MonoBehaviour
         SelectButton(selectButtonIndex);
     }
 
-    void OnSubmit(InputAction.CallbackContext context)
+    public void OnSubmit(InputAction.CallbackContext context)
     {
         //if(context.control.name == "buttonSouth")
         //{
@@ -76,7 +76,7 @@ public class ButtonController : MonoBehaviour
         //}
     }
 
-    void OnCancel(InputAction.CallbackContext context)
+    public void OnCancel(InputAction.CallbackContext context)
     {
         if (helpCanvas.activeSelf)
         {
