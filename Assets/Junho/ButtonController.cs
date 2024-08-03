@@ -94,7 +94,7 @@ public class ButtonController : MonoBehaviour
 
             if(i == index)
             {
-                color.normalColor = new Color(color.normalColor.r, color.normalColor.g, color.normalColor.b, 0.5f);
+                color.normalColor = new Color(color.pressedColor.r, color.pressedColor.g, color.pressedColor.b, 1f);
             }
 
             else
