@@ -108,7 +108,7 @@ public class ButtonController : MonoBehaviour
 
     public void GameStart()
     {
-        SceneManager.LoadScene("Game"); // Game 씬으로 전환
+        SceneManager.LoadScene("Snowboarding"); // Game 씬으로 전환
     }
 
     public void Help()
