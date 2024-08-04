@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Processors;
 using UnityEngine.Windows;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 //using UnityGLTF.Extensions;
 
 /*
@@ -23,7 +25,8 @@ public class Controller : MonoBehaviour
     InputAction groundMoveAction; // 땅 위에 있을 때 받는 인풋 값.
     InputAction airMoveAction; // 점프 후 공중에서 떠있을 때 받는 인풋 값 
     InputAction jumpAction; // 점프를 시키는 인풋 값
-    InputAction restartAction;
+    InputAction reviveAction; // 다시 살리는 인풋 값
+    InputAction restartAction; // 재시작을 위한 인풋값
 
     #endregion
 
@@ -59,6 +62,7 @@ public class Controller : MonoBehaviour
     [SerializeField] float groundCheckDistance = 0.2f; // 레이캐스트를 위한 땅과 보드 사이의 거리 확인 변수
     [SerializeField] float distGround, distGroundL, distGroundR;// 보드가 바닥에서 얼마나 떨어져있는지를 확인하기 위한 변수
     [SerializeField] float boardDeltaY; // 보드의 회전 각도
+    [SerializeField] float revivePosition = 10f;
     [Space(5)]
 
     [Header("RigidBody & Transform for Ray")]
@@ -76,6 +80,9 @@ public class Controller : MonoBehaviour
     [SerializeField] private bool pressR;
     [SerializeField] private bool isDead;
 
+    [SerializeField] TMP_Text infoText;
+
+
     #endregion
 
     #region private void AWAKE 
@@ -85,6 +92,7 @@ public class Controller : MonoBehaviour
         groundMoveAction = action.Player.GroundMove;
         airMoveAction = action.Player.AirMove;
         jumpAction = action.Player.Jump;
+        reviveAction = action.Player.Revive;
         restartAction = action.Player.Restart;
         originalGravity = Physics.gravity.y;
         rg = GetComponent<Rigidbody>();
@@ -287,7 +295,7 @@ public class Controller : MonoBehaviour
 
     #endregion
 
-    #region RESTART
+    #region REVIVE AND RESTART
 
     public void PlayerPressP(InputAction.CallbackContext callbackContext)
     {
@@ -310,7 +318,7 @@ public class Controller : MonoBehaviour
                 return;
             isDead = true;
 
-            Debug.Log("Trigger");
+            infoText.text = "Press R to Revive";
 
             //Canvas.transform.Find("YouDied").gameObject.SetActive(true); [UI CHANGE]
             CurTransform = rg.position; //죽은 위치 체크
@@ -318,30 +326,50 @@ public class Controller : MonoBehaviour
             groundMoveAction.Disable();
             airMoveAction.Disable();
             jumpAction.Disable();
+            restartAction.Disable();
+            reviveAction.Enable();
+
+            reviveAction.performed += PressRToRevive;
+        }
+
+        if(other.gameObject.CompareTag("Restart"))
+        {
+            infoText.text = "Press R to Restart";
+
+            reviveAction.Disable();
+            groundMoveAction.Disable();
+            airMoveAction.Disable();
+            jumpAction.Disable();
             restartAction.Enable();
 
             restartAction.performed += PressRToRestart;
-
         }
+    }
+
+    void PressRToRevive(InputAction.CallbackContext callbackContext)
+    {
+       if (isDead)
+       {
+        infoText.text = "";
+        rg.rotation = Quaternion.Euler(Vector3.zero);
+        rg.position = CurTransform + new Vector3(0, revivePosition, 0);
+        rg.velocity = Vector3.zero;
+        rg.angularVelocity = Vector3.zero;
+        groundMoveAction.Enable();
+        airMoveAction.Enable();
+        jumpAction.Enable();
+        reviveAction.Disable();
+        isDead = false;
+        reviveAction.performed -= PressRToRevive;
+       }
+
     }
 
     void PressRToRestart(InputAction.CallbackContext callbackContext)
     {
-           if (isDead)
-            {
-                //Canvas.transform.Find("YouDied").gameObject.SetActive(false); [UI CHANGE]
-                rg.rotation = Quaternion.Euler(Vector3.zero);
-                rg.position = CurTransform + new Vector3(0, 25f, 0);
-                rg.velocity = Vector3.zero;
-                rg.angularVelocity = Vector3.zero;
-                groundMoveAction.Enable();
-                airMoveAction.Enable();
-        jumpAction.Enable();
-        restartAction.Disable();
-        isDead = false;
         restartAction.performed -= PressRToRestart;
-        }
-
+        string currentSceneName = SceneManager.GetActiveScene().name;
+       SceneManager.LoadScene(currentSceneName);
     }
 
     #endregion

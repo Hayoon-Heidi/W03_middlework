@@ -55,13 +55,22 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Restart"",
+                    ""name"": ""Revive"",
                     ""type"": ""Button"",
                     ""id"": ""6447540e-6fad-4f2d-ae45-be0bb705c0e9"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""cc0f8f69-6f29-40aa-89c2-b4fc91381a5e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Look"",
@@ -323,7 +332,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Restart"",
+                    ""action"": ""Revive"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -334,7 +343,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Restart"",
+                    ""action"": ""Revive"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -357,6 +366,28 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": ""ScaleVector2(x=100,y=100),InvertVector2(invertX=false)"",
                     ""groups"": """",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c787037-9ea0-4c40-a90c-542c82ebbe78"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""420a8723-713a-4c37-aefe-05c65e3f485b"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -482,6 +513,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         m_Player_GroundMove = m_Player.FindAction("GroundMove", throwIfNotFound: true);
         m_Player_AirMove = m_Player.FindAction("AirMove", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Revive = m_Player.FindAction("Revive", throwIfNotFound: true);
         m_Player_Restart = m_Player.FindAction("Restart", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         // UI
@@ -553,6 +585,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_GroundMove;
     private readonly InputAction m_Player_AirMove;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Revive;
     private readonly InputAction m_Player_Restart;
     private readonly InputAction m_Player_Look;
     public struct PlayerActions
@@ -562,6 +595,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         public InputAction @GroundMove => m_Wrapper.m_Player_GroundMove;
         public InputAction @AirMove => m_Wrapper.m_Player_AirMove;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Revive => m_Wrapper.m_Player_Revive;
         public InputAction @Restart => m_Wrapper.m_Player_Restart;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -582,6 +616,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Revive.started += instance.OnRevive;
+            @Revive.performed += instance.OnRevive;
+            @Revive.canceled += instance.OnRevive;
             @Restart.started += instance.OnRestart;
             @Restart.performed += instance.OnRestart;
             @Restart.canceled += instance.OnRestart;
@@ -601,6 +638,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Revive.started -= instance.OnRevive;
+            @Revive.performed -= instance.OnRevive;
+            @Revive.canceled -= instance.OnRevive;
             @Restart.started -= instance.OnRestart;
             @Restart.performed -= instance.OnRestart;
             @Restart.canceled -= instance.OnRestart;
@@ -691,6 +731,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         void OnGroundMove(InputAction.CallbackContext context);
         void OnAirMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnRevive(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
     }

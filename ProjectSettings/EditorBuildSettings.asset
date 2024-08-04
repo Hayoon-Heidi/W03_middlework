@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: 29edddb2fc9200f4fb36bb4a5a36b47f
+  - enabled: 1
+    path: Assets/Scenes/Snowboarding.unity
+    guid: f9af4605ff34fd14b9235ff41fdd1296
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 05a5e51ab9f30204ba0ddbed7d4321c6, type: 2}

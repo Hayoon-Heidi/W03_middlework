@@ -33,13 +33,22 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Restart",
+                    "name": "Revive",
                     "type": "Button",
                     "id": "6447540e-6fad-4f2d-ae45-be0bb705c0e9",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "cc0f8f69-6f29-40aa-89c2-b4fc91381a5e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Look",
@@ -301,7 +310,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Restart",
+                    "action": "Revive",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -312,7 +321,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Restart",
+                    "action": "Revive",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -335,6 +344,28 @@
                     "processors": "ScaleVector2(x=100,y=100),InvertVector2(invertX=false)",
                     "groups": "",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c787037-9ea0-4c40-a90c-542c82ebbe78",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "420a8723-713a-4c37-aefe-05c65e3f485b",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
