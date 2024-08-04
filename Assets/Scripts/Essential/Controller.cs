@@ -318,7 +318,7 @@ public class Controller : MonoBehaviour
                 return;
             isDead = true;
 
-            infoText.text = "Press R to Revive";
+            infoText.text = "Press R / Start to Revive";
 
             //Canvas.transform.Find("YouDied").gameObject.SetActive(true); [UI CHANGE]
             CurTransform = rg.position; //죽은 위치 체크
@@ -334,7 +334,7 @@ public class Controller : MonoBehaviour
 
         if(other.gameObject.CompareTag("Restart"))
         {
-            infoText.text = "Press R to Restart";
+            infoText.text = "Press R / Start to Restart";
 
             reviveAction.Disable();
             groundMoveAction.Disable();
