@@ -8,6 +8,7 @@ using UnityEngine.Windows;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 //using UnityGLTF.Extensions;
 
 /*
@@ -129,6 +130,7 @@ public class Controller : MonoBehaviour
         BasicMoving(moveInput);
         CheckGroundRay();
 
+        CollisionTriggerDeltaTime += Time.deltaTime;
     }
 
     #endregion
@@ -377,5 +379,87 @@ public class Controller : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region 경사면의 법선 벡터에 맞추기
+    float CollisionTriggerDeltaTime = 0f;
+    float CollisionExitDeltaTime = 0f;
+    RaycastHit[] hits;
+    Coroutine coroutine;
+    bool CollisionExit = true;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        CollisionExit = false; // 코루틴 종료를 위한 boolean 변경
+        if (collision.gameObject.CompareTag("Ground") && CollisionTriggerDeltaTime > 2f && CollisionExitDeltaTime > 1f)
+        {
+            Vector3 collisionUp = new Vector3(404f, 404f, 404f);
+            Vector3 collisionPos = new Vector3(404f, 404f, 404f);
+            int num = 0;
+            hits = Physics.RaycastAll(transform.position, Vector3.down);
+            for (int i = 0; i < hits.Length; i++)
+            {
+                if (!hits[i].transform.CompareTag("Ground"))
+                    continue;
+                collisionUp = hits[i].normal;
+                collisionPos = hits[i].point;
+                break;
+            }
+            if (collisionPos.x == 404f && collisionPos.y == 404f && collisionPos.z == 404f)
+                return;
+            //collisionUp = hit[num].collider.gameObject.GetComponent<Terrain>().terrainData.GetInterpolatedNormal(Mathf.Clamp01(collisionPos.x), Mathf.Clamp01(collisionPos.y));
+
+            //if (Vector3.Angle(collisionUp, transform.up) < 5f)
+            //    return;
+            Quaternion rot = Quaternion.FromToRotation(transform.up.normalized, collisionUp) * transform.rotation;
+
+            if (coroutine != null)
+                StopCoroutine(coroutine);
+            coroutine = StartCoroutine(RotateForSafeLanding(rot));
+            //transform.rotation = rot;
+            CollisionTriggerDeltaTime = 0f;
+        }
+        CollisionExitDeltaTime = 0f; // 값 초기화
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        CollisionExit = true; // 탈출 시 탈출 boolean 값 true
+        StartCoroutine("CheckExitTime");
+    }
+
+    IEnumerator CheckExitTime()
+    {
+        while(CollisionExit) // collision 진입 시 코루틴 종료
+        {
+            CollisionExitDeltaTime += Time.unscaledDeltaTime; // collision 탈출 상태일 때 시간 누적
+            yield return null;
+        }
+    }
+
+    IEnumerator RotateForSafeLanding(Quaternion rot) // 경사면 도착하면 해당 법선벡터로 up 벡터를 맞춰 회전
+    {
+        Debug.Log("Coroutine Enter");
+        float StartTime = Time.time;
+        float elapsed = 0f;
+        float t;
+        Quaternion curRot;
+        while (true)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            t = Mathf.Clamp01(elapsed / 3f); // 회전이 완료되는데 최대 1초에 대해 회전을 진행한다
+            if (elapsed > 1.2f) // 
+                break;
+            curRot = transform.rotation;
+            if (Mathf.Abs(curRot.eulerAngles.x - rot.eulerAngles.x) < 0.05f 
+                || Mathf.Abs(curRot.eulerAngles.y - rot.eulerAngles.y) < 0.05f 
+                || Mathf.Abs(curRot.eulerAngles.z - rot.eulerAngles.z) < 0.05f) // 각도 차이가 많지 않으면 거기서 회전 종료 << 체크 필요
+                break;
+            transform.rotation = Quaternion.Lerp(curRot, rot, t);
+            Debug.Log("Rotation-Ing");
+            yield return null;
+        }
+        Debug.Log("Rotation End");
+    }
     #endregion
 }
