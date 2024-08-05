@@ -58,6 +58,7 @@ public class Controller : MonoBehaviour
     [SerializeField] float dragStrenght = 200f; // 속도가 일정 수치 이상인 경우 드래그 값을 해당 값으로 나눔
     [SerializeField] float rotationSpeed = 300f; // 회전 속도
     [SerializeField] float changeGravity = -15f;
+    [SerializeField] float moreSpeed = 2f;
     [Space(5)]
 
     [Header("Distance")]
@@ -129,7 +130,7 @@ public class Controller : MonoBehaviour
         BasicMoving(moveInput);
         CheckGroundRay();
 
-        CollisionTriggerDeltaTime += Time.deltaTime;
+        //CollisionTriggerDeltaTime += Time.deltaTime;
     }
 
     #endregion
@@ -168,7 +169,7 @@ public class Controller : MonoBehaviour
 
             if (moveInput.y > 0)
             {
-                Vector3 force = (Vector3.down * rg.mass);
+                Vector3 force = (Vector3.down * rg.mass * moreSpeed);
                 rg.AddForce(force);
             }
             else if (moveInput.y < 0)
@@ -373,6 +374,7 @@ public class Controller : MonoBehaviour
 
     #endregion
 
+    /*
     #region 경사면의 법선 벡터에 맞추기
     float CollisionTriggerDeltaTime = 1.5f;
     float CollisionExitDeltaTime = 0f;
@@ -441,13 +443,14 @@ public class Controller : MonoBehaviour
             /*if (Mathf.Abs(curRot.eulerAngles.x - rot.eulerAngles.x) < 0.05f 
                 || Mathf.Abs(curRot.eulerAngles.y - rot.eulerAngles.y) < 0.05f 
                 || Mathf.Abs(curRot.eulerAngles.z - rot.eulerAngles.z) < 0.05f) // 각도 차이가 많지 않으면 거기서 회전 종료 << 체크 필요
-                break;*/
+                break;
 
             if (Quaternion.Angle(curRot, rot) < 5f)
                 break;
             transform.rotation = Quaternion.Lerp(curRot, rot, t);
             yield return null;
         }
-    }
-    #endregion
+    } 
+    #endregion*/
+
 }
