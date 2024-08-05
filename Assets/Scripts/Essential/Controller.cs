@@ -64,7 +64,6 @@ public class Controller : MonoBehaviour
     [SerializeField] float groundCheckDistance = 0.2f; // 레이캐스트를 위한 땅과 보드 사이의 거리 확인 변수
     [SerializeField] float distGround, distGroundL, distGroundR;// 보드가 바닥에서 얼마나 떨어져있는지를 확인하기 위한 변수
     [SerializeField] float boardDeltaY; // 보드의 회전 각도
-    [SerializeField] float revivePosition = 10f;
     [Space(5)]
 
     [Header("RigidBody & Transform for Ray")]
