@@ -345,17 +345,10 @@ public class Controller : MonoBehaviour
     {
        if (isDead)
        {
-        infoText.text = "";
-        rg.rotation = Quaternion.Euler(Vector3.zero);
-        rg.position = CurTransform + new Vector3(0, revivePosition, 0);
-        rg.velocity = Vector3.zero;
-        rg.angularVelocity = Vector3.zero;
-        groundMoveAction.Enable();
-        airMoveAction.Enable();
-        jumpAction.Enable();
-        reviveAction.Disable();
-        isDead = false;
-        reviveAction.performed -= PressRToRevive;
+            isDead = false;
+            reviveAction.performed -= PressRToRevive;
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentSceneName);
        }
 
     }
@@ -434,7 +427,6 @@ public class Controller : MonoBehaviour
 
     IEnumerator RotateForSafeLanding(Quaternion rot) // 경사면 도착하면 해당 법선벡터로 up 벡터를 맞춰 회전
     {
-        Debug.Log("Coroutine Enter");
         float StartTime = Time.time;
         float elapsed = 0f;
         float t;
@@ -446,15 +438,17 @@ public class Controller : MonoBehaviour
             if (elapsed > 1.2f) // 
                 break;
             curRot = transform.rotation;
-            if (Mathf.Abs(curRot.eulerAngles.x - rot.eulerAngles.x) < 0.05f 
+
+            /*if (Mathf.Abs(curRot.eulerAngles.x - rot.eulerAngles.x) < 0.05f 
                 || Mathf.Abs(curRot.eulerAngles.y - rot.eulerAngles.y) < 0.05f 
                 || Mathf.Abs(curRot.eulerAngles.z - rot.eulerAngles.z) < 0.05f) // 각도 차이가 많지 않으면 거기서 회전 종료 << 체크 필요
+                break;*/
+
+            if (Quaternion.Angle(curRot, rot) < 5f)
                 break;
             transform.rotation = Quaternion.Lerp(curRot, rot, t);
-            Debug.Log("Rotation-Ing");
             yield return null;
         }
-        Debug.Log("Rotation End");
     }
     #endregion
 }

@@ -486,7 +486,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d7468da68a2fd1149a424dec35184596, type: 2}
+  - {fileID: 2100000, guid: 5bae26a6168bb314eb50edb9dbdacb3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1456,11 +1456,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2401320546773819706, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
       propertyPath: changeGravity
-      value: -15
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 2401320546773819706, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
       propertyPath: reduceGravity
-      value: -5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 2401320546773819706, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
       propertyPath: originalGravity
