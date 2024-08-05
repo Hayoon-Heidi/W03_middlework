@@ -51,11 +51,12 @@ public class Controller : MonoBehaviour
     [SerializeField] float jumpForce = 10f; // 점프 힘
     [SerializeField] float VelForZeroGravity = 5; // 중력을 0으로 만들기 위한 속도 값
     [SerializeField] float reduceGravity = -5f;
-    [SerializeField] float originalGravity;
+    [SerializeField] float originalGravity = -9.81f;
     [SerializeField] float magnitude;
     [SerializeField] float minMagnitude = 3.0f; // 속도가 일정 수치 이하인 경우 드래그 값을 0으로 주는 기준
     [SerializeField] float dragStrenght = 200f; // 속도가 일정 수치 이상인 경우 드래그 값을 해당 값으로 나눔
     [SerializeField] float rotationSpeed = 300f; // 회전 속도
+    [SerializeField] float changeGravity = -15f;
     [Space(5)]
 
     [Header("Distance")]
@@ -94,7 +95,6 @@ public class Controller : MonoBehaviour
         jumpAction = action.Player.Jump;
         reviveAction = action.Player.Revive;
         restartAction = action.Player.Restart;
-        originalGravity = Physics.gravity.y;
         rg = GetComponent<Rigidbody>();
 
         isDead = false;
@@ -249,19 +249,17 @@ public class Controller : MonoBehaviour
         {
             //On the ground/snow
             boardDeltaY += (float)(tilt * (1 + velocity.magnitude / 10f));
-            tiltingAngle = transform.eulerAngles;
-            tiltingAngle.y += boardDeltaY;
-            transform.eulerAngles = tiltingAngle;
-
-            // float moveInput = Mathf.Clamp(Vector3.Dot(localVel, moveDirection), -maxspeed, maxspeed);            
-
+            // tiltingAngle = transform.eulerAngles;
+            // tiltingAngle.y += boardDeltaY;
+            // transform.eulerAngles = tiltingAngle;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + boardDeltaY, transform.eulerAngles.z));
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 20);
+            // float moveInput = Mathf.Clamp(Vector3.Dot(localVel, moveDirection), -maxspeed, maxspeed);
             localVel.x -= localVel.x * turnStrength;
             rg.velocity = transform.TransformDirection(localVel); // 월드 속도로 변경
-
             Vector3 localRot = transform.localRotation.eulerAngles;
-            localRot.z = (distGroundR - distGroundL) * 100; // 기울어진 정도
+            localRot.z = Mathf.Clamp((distGroundR - distGroundL) * 100, -20f, 20f); // 기울어진 정도
             transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(localRot), Time.deltaTime * 10);
-
             if (jumpRequested)
             {
                 rg.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -274,23 +272,18 @@ public class Controller : MonoBehaviour
             //On Air
             float airTlit = tilt;
             transform.Rotate(Vector3.up, airTlit * rotationSpeed * Time.deltaTime, Space.Self);
-
             float slip = airMoveAction.ReadValue<Vector2>().y;
             transform.Rotate(Vector3.right, slip * rotationSpeed * Time.deltaTime, Space.Self);
-
-            if (!isJumping) // 점프 시 중력 줄어드는 값 조절
-            {
                 if (rg.velocity.y > 0)
                 {
                     Physics.gravity = new Vector3(0, reduceGravity, 0);
                 }
                 else if (rg.velocity.y < 0)
                 {
-                    Physics.gravity = new Vector3(0, originalGravity, 0);
+                    Physics.gravity = new Vector3(0, changeGravity, 0);
                 }
-            }
+            
         }
-
     }
 
     #endregion

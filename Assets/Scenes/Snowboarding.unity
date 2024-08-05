@@ -1446,6 +1446,26 @@ PrefabInstance:
       propertyPath: infoText
       value: 
       objectReference: {fileID: 1614082691}
+    - target: {fileID: 2401320546773819706, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
+      propertyPath: jumpForce
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401320546773819706, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
+      propertyPath: turnStrength
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401320546773819706, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
+      propertyPath: changeGravity
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401320546773819706, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
+      propertyPath: reduceGravity
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401320546773819706, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
+      propertyPath: originalGravity
+      value: -12
+      objectReference: {fileID: 0}
     - target: {fileID: 2733893222892096979, guid: 88136562d517a7841a010f6d9b4762c9, type: 3}
       propertyPath: m_Interpolate
       value: 1
