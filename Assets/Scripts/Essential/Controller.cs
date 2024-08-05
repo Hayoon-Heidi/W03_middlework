@@ -382,7 +382,7 @@ public class Controller : MonoBehaviour
     #endregion
 
     #region 경사면의 법선 벡터에 맞추기
-    float CollisionTriggerDeltaTime = 0f;
+    float CollisionTriggerDeltaTime = 1.5f;
     float CollisionExitDeltaTime = 0f;
     RaycastHit[] hits;
     Coroutine coroutine;
@@ -391,11 +391,10 @@ public class Controller : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         CollisionExit = false; // 코루틴 종료를 위한 boolean 변경
-        if (collision.gameObject.CompareTag("Ground") && CollisionTriggerDeltaTime > 2f && CollisionExitDeltaTime > 1f)
+        if (collision.gameObject.CompareTag("Ground") && CollisionTriggerDeltaTime > 1.1f && CollisionExitDeltaTime > 1f && !isDead)
         {
             Vector3 collisionUp = new Vector3(404f, 404f, 404f);
             Vector3 collisionPos = new Vector3(404f, 404f, 404f);
-            int num = 0;
             hits = Physics.RaycastAll(transform.position, Vector3.down);
             for (int i = 0; i < hits.Length; i++)
             {
@@ -407,16 +406,12 @@ public class Controller : MonoBehaviour
             }
             if (collisionPos.x == 404f && collisionPos.y == 404f && collisionPos.z == 404f)
                 return;
-            //collisionUp = hit[num].collider.gameObject.GetComponent<Terrain>().terrainData.GetInterpolatedNormal(Mathf.Clamp01(collisionPos.x), Mathf.Clamp01(collisionPos.y));
 
-            //if (Vector3.Angle(collisionUp, transform.up) < 5f)
-            //    return;
             Quaternion rot = Quaternion.FromToRotation(transform.up.normalized, collisionUp) * transform.rotation;
 
             if (coroutine != null)
                 StopCoroutine(coroutine);
             coroutine = StartCoroutine(RotateForSafeLanding(rot));
-            //transform.rotation = rot;
             CollisionTriggerDeltaTime = 0f;
         }
         CollisionExitDeltaTime = 0f; // 값 초기화
